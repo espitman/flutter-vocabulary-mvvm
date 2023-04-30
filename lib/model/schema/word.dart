@@ -1,4 +1,10 @@
+import 'package:isar/isar.dart';
+
+part 'word.g.dart';
+
+@collection
 class Word {
+  Id id = Isar.autoIncrement;
   final String word;
   final String persian;
   final String description;

@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
+import 'package:vocab/infrastructure/isar_service.dart';
 import 'package:vocab/view/screen/home.dart';
 import 'package:vocab/view_model/vocab_view_model.dart';
 import 'package:vocab/view_model/vocabularies_view_model.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final isar = await IsarService.get();
+  runApp(MyApp(isar: isar));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Isar isar;
+
+  const MyApp({Key? key, required this.isar}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -17,15 +23,18 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<VocabulariesViewModel>(
-          create: (_) => VocabulariesViewModel(),
+          create: (_) => VocabulariesViewModel(isar),
         ),
         ChangeNotifierProvider<VocabViewModel>(
-          create: (_) => VocabViewModel(),
+          create: (_) => VocabViewModel(isar),
         )
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         title: 'My App',
-        home: MyHomePage(title: 'Vocabulary'),
+        home: MyHomePage(
+          title: 'Vocabulary',
+          isar: isar,
+        ),
       ),
     );
   }

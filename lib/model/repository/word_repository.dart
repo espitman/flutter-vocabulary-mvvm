@@ -1,16 +1,30 @@
-import 'dart:convert';
+import 'package:isar/isar.dart';
+import 'package:vocab/model/api/word_api.dart';
+import 'package:vocab/model/database/word_database.dart';
 
-import '../service/word_service.dart';
-import '../word.dart';
+import '../schema/word.dart';
 
 class WordRepository {
-  final WordService _wordService = WordService();
+  final Isar _isar;
+  late WordAPI _wordAPI;
+  late WordDatabase _wordDatabase;
+
+  WordRepository(this._isar) {
+    _wordAPI = WordAPI();
+    _wordDatabase = WordDatabase(_isar);
+  }
 
   Future<List<Word>> fetchWordList() async {
-    dynamic response = await _wordService.getWords();
-    final List<dynamic> responseData = jsonDecode(response);
-    List<Word> words =
-        responseData.map((postJson) => Word.fromJson(postJson)).toList();
+    final wordsList = await _wordDatabase.fetchWordList();
+    if (wordsList.isNotEmpty) {
+      return wordsList;
+    }
+    dynamic words = await _wordAPI.getWords();
+    await _wordDatabase.insertAll(words);
     return words;
+  }
+
+  Future<void> sync() async {
+    await _wordDatabase.clearDB();
   }
 }
