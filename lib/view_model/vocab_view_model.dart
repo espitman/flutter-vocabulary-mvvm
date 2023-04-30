@@ -1,11 +1,17 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../model/repository/word_repository.dart';
 import '../model/word.dart';
 
 class VocabViewModel with ChangeNotifier {
+
+  final Isar isar;
+  VocabViewModel(this.isar);
+
   List<Word> _words = [];
   bool _isLoading = true;
   int _index = 0;
@@ -22,7 +28,7 @@ class VocabViewModel with ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     try {
-      List<Word> wordList = await WordRepository().fetchWordList();
+      List<Word> wordList = await WordRepository(isar).fetchWordList();
       _words = wordList;
       _isLoading = false;
       notifyListeners();
