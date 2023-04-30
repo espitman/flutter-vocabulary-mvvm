@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../model/word.dart';
+import '../../model/schema/word.dart';
 import 'word_bottomSheet.dart';
 import 'custom_card.dart';
 

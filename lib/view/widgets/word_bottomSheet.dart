@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vocab/model/word.dart';
+import 'package:vocab/model/schema/word.dart';
 
 import 'web_viewer.dart';
 

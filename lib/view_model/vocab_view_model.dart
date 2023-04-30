@@ -2,13 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../model/repository/word_repository.dart';
-import '../model/word.dart';
+import '../model/schema/word.dart';
 
 class VocabViewModel with ChangeNotifier {
-
   final Isar isar;
   VocabViewModel(this.isar);
 

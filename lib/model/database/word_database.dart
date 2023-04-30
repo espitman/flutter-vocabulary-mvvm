@@ -1,6 +1,6 @@
 import 'package:isar/isar.dart';
 
-import '../word.dart';
+import '../schema/word.dart';
 
 class WordDatabase {
   final Isar _isar;
@@ -14,6 +14,12 @@ class WordDatabase {
   Future<void> clearDB() async {
     await _isar.writeTxn(() async {
       await _isar.words.clear();
+    });
+  }
+
+  Future<void> insertAll(List<Word> words) async {
+    await _isar.writeTxn(() async {
+      await _isar.words.putAll(words);
     });
   }
 }

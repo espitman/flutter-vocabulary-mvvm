@@ -1,7 +1,7 @@
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../word.dart';
+import '../model/schema/word.dart';
 
 class IsarService {
   static Future<Isar> get() async {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:provider/provider.dart';
-import 'package:vocab/model/database/isar_service.dart';
+import 'package:vocab/infrastructure/isar_service.dart';
 import 'package:vocab/view/screen/home.dart';
 import 'package:vocab/view_model/vocab_view_model.dart';
 import 'package:vocab/view_model/vocabularies_view_model.dart';
